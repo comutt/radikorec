@@ -11,7 +11,7 @@ class Config:
 	def __init__(self, args):
 		self.args = args	
 
-		self.duration_sec = 60 * args.duration + 30
+		self.duration_sec = 60 * args.duration
 		
 		self.P("\n--**-- %s --**--" % commands.getoutput("date -u"))
 		
