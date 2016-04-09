@@ -42,6 +42,7 @@ if __name__ == '__main__':
 	parser.add_argument('--duration', type=int, default=1, help="time(min) to record. default(1)")
 	parser.add_argument('--prefix', default='RADIKOREC', help="filename prefix. default(RADIKOREC)")
 	parser.add_argument('--rtmpbin', default='rtmpdump', help="The path for rtmpdump binary >= 2.4. default(rtmpdump)")
+	parser.add_argument('--ffmpegbin', default='ffmpeg', help="The path for ffmpeg. default(ffmpeg)")
 	parser.add_argument('--channel', default='RN1', help="default(RN1)")
 	parser.add_argument('--directory', default='/tmp', help="output directory. default(/tmp)")
 	parser.add_argument('--debug', action='store_true', default=False, help="print messages on console.")
@@ -81,7 +82,7 @@ if __name__ == '__main__':
 	# fix the file
 	config.R("mv %s %s.raw" % (config.filename, config.filename))
 
-	command2 = "ffmpeg -t %d -i %s.raw -acodec copy %s".strip() % (config.duration_sec, config.filename, config.filename)
+	command2 = "%s -t %d -i %s.raw -acodec copy %s".strip() % (config.args.ffmpegbin, config.duration_sec, config.filename, config.filename)
 	r = config.R(command2)
 	if r is not 0:
 		config.P("ERROR command2 %d" % r)
